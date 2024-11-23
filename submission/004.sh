@@ -1,11 +1,11 @@
 # Using descriptors, compute the taproot address at index 100 derived from this extended public key:
 #   `xpub6Cx5tvq6nACSLJdra1A6WjqTo1SgeUZRFqsX5ysEtVBMwhCCRa4kfgFqaT2o1kwL3esB1PsYr3CUdfRZYfLHJunNWUABKftK2NjHUtzDms2`
-#XPUB="xpub6Cx5tvq6nACSLJdra1A6WjqTo1SgeUZRFqsX5ysEtVBMwhCCRa4kfgFqaT2o1kwL3esB1PsYr3CUdfRZYfLHJunNWUABKftK2NjHUtzDms2"
-#BASIC_DESC="tr($XPUB/100)"
-#DESC_INFO=$(bitcoin-cli getdescriptorinfo "$BASIC_DESC")
-#CHECKSUM=$(echo $DESC_INFO | jq -r '.checksum')
-#FULL_DESC="$BASIC_DESC#$CHECKSUM"
-#ADDRESS=$(bitcoin-cli deriveaddresses "$FULL_DESC" | jq -r '.[0]')
-#echo $ADDRESS
-bitcoin-cli deriveaddresses "tr(xpub6Cx5tvq6nACSLJdra1A6WjqTo1SgeUZRFqsX5ysEtVBMwhCCRa4kfgFqaT2o1kwL3esB1PsYr3CUdfRZYfLHJunNWUABKftK2NjHUtzDms2/100)#5p2mg7zx" | jq -r '.[0]'
+XPUB="xpub6Cx5tvq6nACSLJdra1A6WjqTo1SgeUZRFqsX5ysEtVBMwhCCRa4kfgFqaT2o1kwL3esB1PsYr3CUdfRZYfLHJunNWUABKftK2NjHUtzDms2"
+BASIC_DESC="tr($XPUB/100)"
+DESC_INFO=$(bitcoin-cli getdescriptorinfo "$BASIC_DESC")
+CHECKSUM=$(echo $DESC_INFO | jq -r '.checksum')
+FULL_DESC="$BASIC_DESC#$CHECKSUM"
+ADDRESS=$(bitcoin-cli deriveaddresses "$FULL_DESC" | jq -jr '.[]')
+echo $ADDRESS
+
 
