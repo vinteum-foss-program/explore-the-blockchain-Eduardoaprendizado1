@@ -5,7 +5,6 @@ BASIC_DESC="tr($XPUB/100)"
 DESC_INFO=$(bitcoin-cli getdescriptorinfo "$BASIC_DESC")
 CHECKSUM=$(echo $DESC_INFO | jq -r '.checksum')
 FULL_DESC="$BASIC_DESC#$CHECKSUM"
-ADDRESS=$(bitcoin-cli deriveaddresses "$FULL_DESC" | sed -e 's/\[//' -e 's/\]//' -e 's/"//g' -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
-echo $ADDRESS
+bitcoin-cli deriveaddresses "$FULL_DESC" | jq -r 'if type == "array" then .[0] else . end'
 
 
